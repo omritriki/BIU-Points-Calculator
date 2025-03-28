@@ -5,7 +5,7 @@
 #                                               2025
 # ===================================================================================================
 # Description:
-#   This script reads a PDF file, extracts tables from it, and processes the data.
+#   This script reads a PDF file, verifies if it is a gradesheet, extracts tables from it, and processes the data.
 # Inputs:
 #   - pdf_file: A werkzeug FileStorage object representing the uploaded PDF.
 # Outputs:
@@ -15,6 +15,17 @@
 import pdfplumber
 from CID2Hebrew import replace_cid_tokens_in_list
 
+def is_gradesheet(pdf):
+    expected_header = ['ןויצ', 'ז״נ', 'ש״ש', 'דוק', 'סרוק אשונה םש']
+    for page in pdf.pages:
+        tables = page.extract_tables()
+        if tables:
+            # Assume the header is in the first row of the first table
+            header_text = replace_cid_tokens_in_list(tables[0][0])
+            if expected_header == header_text:
+                return True
+    return False
+
 
 def readFile(pdf_file):
     all_tables = []
@@ -22,8 +33,12 @@ def readFile(pdf_file):
     try:
         # Open the PDF file using pdfplumber
         with pdfplumber.open(pdf_file.stream) as pdf:
-            for page_number, page in enumerate(pdf.pages, start=1):
-                # Extract tables from the current page
+            # Verify if the file is a gradesheet
+            if not is_gradesheet(pdf):
+                raise ValueError("The uploaded file is not a valid gradesheet.")
+
+            # Extract tables from each page
+            for page in pdf.pages:
                 tables_on_page = page.extract_tables()
                 for table in tables_on_page:
                     new_table = []
@@ -40,7 +55,7 @@ def readFile(pdf_file):
                             except ValueError:
                                 pass
                             # Handle cells with dashes and digits
-                            if cell.__contains__("-") and any(ch.isdigit() for ch in cell):
+                            if "-" in cell and any(ch.isdigit() for ch in cell):
                                 continue
                             # Reverse the text in the cell
                             cleaned_row[i] = cell[::-1]

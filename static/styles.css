@@ -1,4 +1,14 @@
-/* General Reset */
+/* ===================================================================================================
+                                       BIU N.K.Z Calculator
+                                            Omri Triki
+                                       Bar Ilan University
+                                               2025
+   ===================================================================================================
+   Description:
+    This file contains the CSS styles for the BIU N.K.Z Calculator. It defines the layout, typography,
+    and visual design for the application, including the header, form, buttons, and results section.
+   =================================================================================================== */
+
 * {
     margin: 0;
     padding: 0;
