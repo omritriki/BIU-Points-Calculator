@@ -1,60 +1,186 @@
+<!-- ============================================================================================== -->
+<!--                                       BIU N.K.Z Calculator                                      -->
+<!--                                            Omri Triki                                           -->
+<!--                                       Bar Ilan University                                       -->
+<!--                                               2025                                              -->
+<!-- ============================================================================================== -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BIU Points Calculator</title>
     <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f5f7;
+            color: #1d1d1f;
             margin: 0;
             padding: 0;
             text-align: center;
         }
-        h1 {
-            margin-top: 20%;
-            font-size: 3em;
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #ffffff;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        main {
+            margin-top: 80px;
+            padding: 20px;
+        }
+
+        p {
+            font-size: 1em;
+            color: #6e6e73;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px; /* Reduced padding */
+            max-width: 400px; /* Reduced width */
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            font-size: 1em; /* Slightly smaller font size */
+            font-weight: 500;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        select, input[type="file"], button {
+            width: 100%;
+            font-size: 1em; /* Slightly smaller font size */
+            padding: 8px; /* Reduced padding */
+            margin-bottom: 15px; /* Reduced margin */
+            border: 1px solid #d2d2d7;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            color: #1d1d1f;
+            outline: none;
+            transition: all 0.2s ease-in-out;
+        }
+
+        select:focus, input[type="file"]:focus, button:focus {
+            border-color: #007aff;
+            background-color: #ffffff;
+        }
+
+        button {
+            background-color: #007aff;
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 1em;
+            color: #007aff;
+            text-align: left; /* Align results to the left */
+            max-width: 400px; /* Match the form width */
+            margin: 20px auto; /* Center the results below the form */
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #6e6e73;
+        }
+
+        /* Right-to-left styling for the starting year dropdown */
+        #starting-year {
+            direction: rtl; /* Set text direction to right-to-left */
+            text-align: right; /* Align text to the right */
         }
     </style>
 </head>
 <body>
-    <header style="position: fixed; top: 0; width: 100%; background-color: #f8f9fa; padding: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-        <h1 style="margin: 10px; font-size: 1.5em;">BIU Points Calculator</h1>
+    <header>
+        <h1>BIU Points Calculator</h1>
     </header>
-    <div style="margin-top: 60px;">
-    <div style="margin-top: 120px;"> <!-- Increased margin-top to add padding -->
-    <p style="font-size: 1.2em;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    <p style="font-size: 1.2em;">Vivamus lacinia odio vitae vestibulum vestibulum.</p>
-    </div>
-    </div>
-    <div style="margin-top: 100px;">
-        <label for="degree">Choose Degree:</label>
-        <select id="degree" name="degree">
-            <option value="Electrical Engineering">Electrical Engineering</option>
-            <option value="Computer Engineering">Computer Engineering</option>
-            <option value="Industry & Data Systems Engineering">Industry & Data Systems Engineering</option>
-            <option value="Software Engineering">Software Engineering</option>
-        </select>
-        <br><br>
-        <label for="starting-year">Choose Starting Year:</label>
-        <select id="starting-year" name="starting-year">
-            <option value="תשפ״ב">תשפ״ב</option>
-            <option value="תשפ״ג">תשפ״ג</option>
-            <option value="תשפ״ד">תשפ״ד</option>
-            <option value="תשפ״ה">תשפ״ה</option>
-        </select>
-        <br><br>
-        <form id="uploadForm" enctype="multipart/form-data" style="margin-top: 20px;">
+    <main>
+        <p>Please select your degree and starting year, then upload your PDF transcript from Inbar (אישורים להורדה ללא עלות).</p>
+        <p>The system will analyze your grade sheet and calculate your total credit points, including courses you're enrolled in (even if incomplete) and Jewish Studies courses.</p>
+        <form id="uploadForm" enctype="multipart/form-data" method="POST" action="/upload">
             <label for="gradesheet">Upload Gradesheet (PDF):</label>
-            <input type="file" id="gradesheet" name="gradesheet" accept=".pdf">
-            <br><br>
+            <input type="file" id="gradesheet" name="gradesheet" accept=".pdf" required>
+            <label for="degree">Choose Degree:</label>
+            <select id="degree" name="degree" onchange="updateStartingYears()" required>
+                {% for degree in degree_options %}
+                    <option value="{{ degree }}">{{ degree }}</option>
+                {% endfor %}
+            </select>
+            <label for="starting-year">Choose Starting Year:</label>
+            <select id="starting-year" name="starting-year" required>
+                <!-- Starting years will be dynamically populated -->
+            </select>
             <button type="submit">Calculate</button>
         </form>
-    </div>
-
-    <!-- Div to display the result -->
-    <div id="result" style="margin-top: 20px; font-size: 1.2em; color: green;"></div>
-
+        <div id="result"></div>
+    </main>
+    <footer>
+        &copy; 2025 BIU Points Calculator. Designed by Omri Triki.
+    </footer>
     <script>
+        const startingYears = JSON.parse('{{ starting_years|tojson|safe }}'); // Pass the starting years from Flask
+
+        function updateStartingYears() {
+            const degreeSelect = document.getElementById('degree');
+            const yearSelect = document.getElementById('starting-year');
+            const selectedDegree = degreeSelect.value;
+
+            // Clear existing options
+            yearSelect.innerHTML = '';
+
+            // Populate starting years for the selected degree
+            if (startingYears[selectedDegree]) {
+                startingYears[selectedDegree].forEach(year => {
+                    const option = document.createElement('option');
+                    option.value = year;
+                    option.textContent = year;
+                    yearSelect.appendChild(option);
+                });
+            }
+        }
+
+        // Initialize starting years for the default selected degree
+        document.addEventListener('DOMContentLoaded', updateStartingYears);
+
         document.getElementById('uploadForm').addEventListener('submit', async function (event) {
             event.preventDefault(); // Prevent the default form submission
 

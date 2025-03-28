@@ -1,6 +1,16 @@
+# ===================================================================================================
+#                                       BIU N.K.Z Calculator
+#                                            Omri Triki
+#                                       Bar Ilan University
+#                                               2025
+# ===================================================================================================
+
+
 from flask import Flask, request, render_template, jsonify
 import subprocess
 import os
+from pointsDict import points # Import the pointsDict module
+from main import main  # Import the main function
 
 app = Flask(__name__)
 UPLOAD_FOLDER = 'uploads'
@@ -11,12 +21,13 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 @app.route('/')
 def index():
-    # Render the existing index.html file
-    return render_template('index.html')
+    # Get the degree options and their starting years dynamically from pointsDict
+    degree_options = list(points.keys())
+    starting_years = {degree: list(points[degree].keys()) for degree in degree_options}
+    return render_template('index.html', degree_options=degree_options, starting_years=starting_years)
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
-    # Check if the file is in the request
     if 'gradesheet' not in request.files:
         return "No file part", 400
 
@@ -25,20 +36,19 @@ def upload_file():
         return "No selected file", 400
 
     if file:
-        # Save the uploaded file to the uploads folder
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-        file.save(filepath)
+        # Extract degree and starting year from the form
+        degree = request.form.get('degree')
+        year = request.form.get('starting-year')
 
-        # Run the file through main.py
+        if not degree or not year:
+            return "Degree or starting year not provided", 400
+
         try:
-            result = subprocess.run(
-                ['python3', 'main.py', filepath],
-                capture_output=True,
-                text=True
-            )
-            # Return the output of main.py
-            return result.stdout, 200
+            from main import main  # Import the main function
+            result = main(file, degree, year)  # Pass the file and form data to main
+            return result, 200
         except Exception as e:
+            print(f"Error: {str(e)}")
             return f"An error occurred: {str(e)}", 500
 
 if __name__ == '__main__':
