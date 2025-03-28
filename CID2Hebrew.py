@@ -4,7 +4,14 @@
 #                                       Bar Ilan University
 #                                               2025
 # ===================================================================================================
-
+# Description:
+# This file contains functions to convert CID-encoded text to Hebrew characters.
+# Inputs:
+#   - text: A string containing CID-encoded text.
+#   - row_list: A list of strings, where each string may contain CID-encoded text.
+# Outputs:
+#   - Converted text or list with Hebrew characters replacing CID tokens.
+# ===================================================================================================
 
 import re
 
@@ -46,16 +53,15 @@ MAP = {
     "3": " ",
 }
 
-
 def cid_to_hebrew(text: str) -> str:
-    pattern = r"\(cid:(\d+)\)"
+    pattern = r"\(cid:(\d+)\)"  # Match CID tokens in the format '(cid:###)'
 
     def cid_replacer(match):
-        cid_number = match.group(1)
-        return MAP.get(cid_number, f"({cid_number})")
+        cid_number = match.group(1)  # Extract the CID number
+        return MAP.get(cid_number, f"({cid_number})")  # Replace with Hebrew or keep CID
 
-    return re.sub(pattern, cid_replacer, text)
+    return re.sub(pattern, cid_replacer, text)  # Replace all CID tokens in the text
 
 
 def replace_cid_tokens_in_list(row_list):
-    return [cid_to_hebrew(cell) for cell in row_list]
+    return [cid_to_hebrew(cell) for cell in row_list]  # Process each cell in the list

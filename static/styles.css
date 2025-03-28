@@ -71,6 +71,11 @@ select, input[type="file"], button {
     transition: all 0.2s ease-in-out;
 }
 
+input[type="file"] {
+    font-size: 0.9em; /* Make the text smaller */
+    color: #6e6e73; /* Subtle color for the text */
+}
+
 select:focus, input[type="file"]:focus, button:focus {
     border-color: #007aff;
     background-color: #ffffff;

@@ -4,8 +4,12 @@
 #                                       Bar Ilan University
 #                                               2025
 # ===================================================================================================
+# Description:
+# This file contains a dictionary of degree programs and their corresponding credit points
+# for different academic years. The data is used to calculate total required points for each degree.
+# ===================================================================================================
 
-
+# Dictionary of degree programs and their credit points by academic year
 points = {
     "Electrical Engineering": {
         "תשפ״ב": 91.25,

@@ -81,7 +81,7 @@
 
                 if (response.ok) {
                     const result = await response.text();
-                    resultDiv.innerHTML = `<h3>Result:</h3><pre>${result}</pre>`;
+                    resultDiv.innerHTML = `<pre>${result}</pre>`;
                 } else {
                     resultDiv.innerHTML = `<h3 style="color: red;">Error:</h3><pre>${await response.text()}</pre>`;
                 }
