@@ -9,8 +9,8 @@
 from flask import Flask, request, render_template, jsonify
 import subprocess
 import os
-from pointsDict import points # Import the pointsDict module
-from main import main  # Import the main function
+from pointsDict import points 
+from main import main  
 
 app = Flask(__name__)
 
@@ -39,12 +39,13 @@ def upload_file():
             return "Degree or starting year not provided", 400
 
         try:
-            from main import main  # Import the main function
+            # from main import main  # Import the main function
             result = main(file, degree, year)  # Pass the file and form data to main
             return result, 200
         except Exception as e:
             print(f"Error: {str(e)}")
-            return f"An error occurred: {str(e)}", 500
+            return f"{str(e)}", 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # This line is ignored when running with Gunicorn
+    app.run(debug=False)  

@@ -1,29 +1,30 @@
 /* ===================================================================================================
-                                       BIU N.K.Z Calculator
-                                            Omri Triki
-                                       Bar Ilan University
-                                               2025
+   BIU N.K.Z Calculator
+   Designed by Omri Triki
+   Bar Ilan University
+   2025
    ===================================================================================================
    Description:
-    This file contains the CSS styles for the BIU N.K.Z Calculator. It defines the layout, typography,
-    and visual design for the application, including the header, form, buttons, and results section.
+   This file contains the CSS styles for the BIU N.K.Z Calculator. It defines the layout, typography,
+   and visual design for the application, including the header, form, buttons, and results section.
    =================================================================================================== */
 
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Body Styles */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: #f5f5f7;
     color: #1d1d1f;
-    margin: 0;
-    padding: 0;
     text-align: center;
 }
 
+/* Header Styles */
 header {
     position: fixed;
     top: 0;
@@ -40,8 +41,9 @@ header h1 {
     color: #1d1d1f;
 }
 
+/* Main Content Styles */
 main {
-    margin-top: 80px;
+    margin-top: 65px; /* Space below the header */
     padding: 20px;
 }
 
@@ -51,6 +53,7 @@ p {
     margin-bottom: 20px;
 }
 
+/* Form Styles */
 form {
     background-color: #ffffff;
     border-radius: 12px;
@@ -81,16 +84,19 @@ select, input[type="file"], button {
     transition: all 0.2s ease-in-out;
 }
 
+/* File Input Styles */
 input[type="file"] {
-    font-size: 0.9em; /* Make the text smaller */
-    color: #6e6e73; /* Subtle color for the text */
+    font-size: 0.9em; /* Slightly smaller text */
+    color: #6e6e73; /* Subtle text color */
 }
 
+/* Focus Styles */
 select:focus, input[type="file"]:focus, button:focus {
     border-color: #007aff;
     background-color: #ffffff;
 }
 
+/* Button Styles */
 button {
     background-color: #007aff;
     color: #ffffff;
@@ -103,26 +109,69 @@ button:hover {
     background-color: #005bb5;
 }
 
+/* Results Section Styles */
 #result {
     margin-top: 20px;
-    font-size: 1em;
-    color: #007aff;
+    margin-bottom: 10px;
+    font-size: 1.1em; /* Match the font size of <p> */
+    color: #6e6e73; /* Match the color of <p> */
     text-align: left;
     max-width: 400px;
-    margin: 20px auto;
+    margin: 10px auto;
     background-color: #ffffff;
     border-radius: 8px;
     padding: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: inherit; /* Use the same font as the body */
+    border: 1px solid #d2d2d7; /* Add a subtle border */
 }
 
+/* Error Message Styles */
+.error-message {
+    background-color: #ffe6e6; /* Light red background */
+    color: #d9534f; /* Red text color */
+    border: 1px solid #d9534f; /* Red border */
+    border-radius: 8px;
+    padding: 10px;
+    text-align: left;
+    font-family: inherit;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.error-message h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.error-message p {
+    margin: 0;
+    font-size: 1em;
+}
+
+/* Footer Styles */
 footer {
-    margin-top: 20px;
+    position: fixed;
+    padding: 10px 0;
+    bottom: 0; /* Align it to the bottom */
+    width: 100%;
+    margin-top: 10px; 
+    margin-bottom: 10px;
+    text-align: center; /* Center the text */
+
     font-size: 0.9em;
     color: #6e6e73;
+
 }
 
+/* Dropdown Styles */
 #starting-year {
     direction: rtl;
     text-align: right;
+}
+
+/* Small Text Styles */
+.small-text {
+    font-size: 0.8em; /* Slightly smaller text */
+    color: #6e6e73; /* Subtle text color */
 }

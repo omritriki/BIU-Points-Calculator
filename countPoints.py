@@ -23,24 +23,23 @@ def identifyCourses(row):
     return -1  # Other course
 
 
-def countPoints(tables):
+def countPoints(table):
     engPoints = 0.0  
     judPoints = 0.0  
 
-    for table in tables:
-        for row in table:
-            switch = identifyCourses(row)  # Identify the course type
-            if switch == -1:
-                continue  # Skip rows that are not relevant
-            if switch == 1:  # Engineering course
-                try:
-                    engPoints += row[3]
-                except (TypeError, ValueError):
-                    pass  # Ignore invalid data
-            if switch == 2:  # Judaism course
-                try:
-                    judPoints += row[3]
-                except (TypeError, ValueError):
-                    pass  # Ignore invalid data
+    for row in table:
+        switch = identifyCourses(row)  # Identify the course type
+        if switch == -1:
+            continue  # Skip rows that are not relevant
+        if switch == 1:  # Engineering course
+            try:    
+                engPoints += row[3]
+            except (TypeError, ValueError):
+                pass  # Ignore invalid data
+        if switch == 2:  # Judaism course
+            try:
+                judPoints += row[3]
+            except (TypeError, ValueError):
+                pass  # Ignore invalid data
     return engPoints, judPoints  # Return the calculated points
 

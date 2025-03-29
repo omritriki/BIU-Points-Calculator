@@ -21,19 +21,19 @@ from countPoints import countPoints
 
 def main(file, degree, year):
     # Process the uploaded file to extract tables
-    tables = readFile(file)  # Extract data from the PDF
-    engPoints, judPoints = countPoints(tables)  # Calculate engineering and Judaism points
+    table = readFile(file)  # Extract data from the PDF
+    engPoints, judPoints = countPoints(table)  # Calculate engineering and Judaism points
 
     # Calculate total points and GPA
     total_points = points[degree][year] * 2
     max_binary_points = points[degree][year] * 0.2
-    average = calculateGPA(tables)  
+    average = calculateGPA(table)
 
-    # Prepare the result summary
+    # Prepare the result summary with <span> tags for smaller text
     result = (
-        f"Engineering points: {engPoints} (out of {total_points} points)\n"
-        f"Maximum binary points: {max_binary_points:.2f}\n"
-        f"Judaism points: {judPoints} (out of 20 points)\n"
+        f"Engineering points: {engPoints:.2f}<span class='small-text'> (out of {total_points:.2f} points)</span><br>"
+        f"Maximum binary points: {max_binary_points:.2f}<br>"
+        f"Judaism points: {judPoints}<span class='small-text'> (out of 20 points)</span><br>"
         f"Average: {average:.2f}"
     )
     return result

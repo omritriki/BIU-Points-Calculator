@@ -28,20 +28,26 @@ def is_gradesheet(pdf):
 
 
 def readFile(pdf_file):
-    all_tables = []
+    """
+    Read and process tables from a PDF file, combining all tables into a single joined table.
+    Args:
+        pdf_file: A werkzeug FileStorage object representing the uploaded PDF.
+    Returns:
+        A single list containing all rows from all tables.
+    """
+    joined_table = []  # Initialize a single table to hold all rows
 
     try:
         # Open the PDF file using pdfplumber
         with pdfplumber.open(pdf_file.stream) as pdf:
             # Verify if the file is a gradesheet
             if not is_gradesheet(pdf):
-                raise ValueError("The uploaded file is not a valid gradesheet.")
+                raise ValueError("The uploaded file is not a valid gradesheet")
 
             # Extract tables from each page
             for page in pdf.pages:
                 tables_on_page = page.extract_tables()
                 for table in tables_on_page:
-                    new_table = []
                     for row in table:
                         # Process each row in the table
                         cleaned_row = replace_cid_tokens_in_list(row)  # Replace CID tokens
@@ -59,13 +65,10 @@ def readFile(pdf_file):
                                 continue
                             # Reverse the text in the cell
                             cleaned_row[i] = cell[::-1]
-                        new_table.append(cleaned_row)  # Add the processed row to the new table
-                    all_tables.append(new_table)  # Add the processed table to the list of all tables
+                        joined_table.append(cleaned_row)  # Add the processed row to the joined table
     except Exception as e:
         # Handle any errors that occur during processing
         print(f"Error processing PDF file: {str(e)}")
         raise
 
-    # Log the number of extracted tables
-    print(f"Extracted {len(all_tables)} tables from the PDF.")
-    return all_tables
+    return joined_table
