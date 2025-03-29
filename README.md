@@ -45,11 +45,7 @@ biu-points-calculator/
 
 - Flask
 - pdfplumber
-- gunicorn (optional, for production deployment)
 
-## License
-
-MIT License
 ```
 
 Feel free to adjust the content as your project evolves.
