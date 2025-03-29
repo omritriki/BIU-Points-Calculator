@@ -14,10 +14,10 @@
 #   - A formatted string summarizing the calculated points and GPA.
 # ===================================================================================================
 
-from readFile import readFile
-from GPA import calculateGPA
-from pointsDict import points
-from countPoints import countPoints
+from read_file import readFile
+from calculate_gpa import calculateGPA
+from points_dict import points
+from count_points import countPoints
 
 def main(file, degree, year):
     # Process the uploaded file to extract tables

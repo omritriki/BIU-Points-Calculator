@@ -13,7 +13,7 @@
 # ===================================================================================================
 
 import pdfplumber
-from CID2Hebrew import replace_cid_tokens_in_list
+from cid_to_hebrew import replace_cid_tokens_in_list
 
 def is_gradesheet(pdf):
     expected_header = ['ןויצ', 'ז״נ', 'ש״ש', 'דוק', 'סרוק אשונה םש']

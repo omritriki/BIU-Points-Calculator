@@ -9,7 +9,7 @@
 from flask import Flask, request, render_template, jsonify
 import subprocess
 import os
-from pointsDict import points 
+from points_dict import points 
 from main import main  
 
 app = Flask(__name__)

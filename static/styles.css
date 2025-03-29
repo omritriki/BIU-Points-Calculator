@@ -59,7 +59,7 @@ form {
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    max-width: 400px;
+    max-width: 420px;
     margin: 0 auto;
 }
 
@@ -116,7 +116,7 @@ button:hover {
     font-size: 1.1em; /* Match the font size of <p> */
     color: #6e6e73; /* Match the color of <p> */
     text-align: left;
-    max-width: 400px;
+    max-width: 420px;
     margin: 10px auto;
     background-color: #ffffff;
     border-radius: 8px;
