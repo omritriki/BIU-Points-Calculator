@@ -140,7 +140,7 @@ button:hover {
 
 .error-message h3 {
     margin: 0 0 10px 0;
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: bold;
 }
 
@@ -158,10 +158,8 @@ footer {
     margin-top: 10px; 
     margin-bottom: 10px;
     text-align: center; /* Center the text */
-
     font-size: 0.9em;
     color: #6e6e73;
-
 }
 
 /* Dropdown Styles */

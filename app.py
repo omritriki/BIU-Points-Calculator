@@ -9,16 +9,17 @@
 from flask import Flask, request, render_template, jsonify
 import subprocess
 import os
-from points_dict import points 
 from main import main  
+from calculator import points_dict
+
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
     # Get the degree options and their starting years dynamically from pointsDict
-    degree_options = list(points.keys())
-    starting_years = {degree: list(points[degree].keys()) for degree in degree_options}
+    degree_options = list(points_dict.points.keys())
+    starting_years = {degree: list(points_dict.points[degree].keys()) for degree in degree_options}
     return render_template('index.html', degree_options=degree_options, starting_years=starting_years)
 
 @app.route('/upload', methods=['POST'])

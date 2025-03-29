@@ -13,7 +13,7 @@
 # ===================================================================================================
 
 import pdfplumber
-from cid_to_hebrew import replace_cid_tokens_in_list
+from calculator import cid_to_hebrew
 
 def is_gradesheet(pdf):
     expected_header = ['ןויצ', 'ז״נ', 'ש״ש', 'דוק', 'סרוק אשונה םש']
@@ -21,7 +21,7 @@ def is_gradesheet(pdf):
         tables = page.extract_tables()
         if tables:
             # Assume the header is in the first row of the first table
-            header_text = replace_cid_tokens_in_list(tables[0][0])
+            header_text = cid_to_hebrew.convert_cid_list_to_hebrew(tables[0][0])
             if expected_header == header_text:
                 return True
     return False
@@ -50,7 +50,7 @@ def readFile(pdf_file):
                 for table in tables_on_page:
                     for row in table:
                         # Process each row in the table
-                        cleaned_row = replace_cid_tokens_in_list(row)  # Replace CID tokens
+                        cleaned_row = cid_to_hebrew.convert_cid_list_to_hebrew(row)  # Replace CID tokens
                         cleaned_row.reverse()  # Reverse the row for proper order
                         for i in range(len(cleaned_row)):
                             cell = cleaned_row[i]

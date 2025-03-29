@@ -14,20 +14,19 @@
 #   - A formatted string summarizing the calculated points and GPA.
 # ===================================================================================================
 
-from read_file import readFile
-from calculate_gpa import calculateGPA
-from points_dict import points
-from count_points import countPoints
+# Import necessary modules
+from calculator import read_file, calculate_points, calculate_gpa, points_dict
+
 
 def main(file, degree, year):
     # Process the uploaded file to extract tables
-    table = readFile(file)  # Extract data from the PDF
-    engPoints, judPoints = countPoints(table)  # Calculate engineering and Judaism points
+    table = read_file.readFile(file)  # Extract data from the PDF
+    engPoints, judPoints = calculate_points.countPoints(table)  # Calculate engineering and Judaism points
 
     # Calculate total points and GPA
-    total_points = points[degree][year] * 2
-    max_binary_points = points[degree][year] * 0.2
-    average = calculateGPA(table)
+    total_points = points_dict.points[degree][year] * 2
+    max_binary_points = points_dict.points[degree][year] * 0.2
+    average = calculate_gpa.calculateGPA(table)
 
     # Prepare the result summary with <span> tags for smaller text
     result = (

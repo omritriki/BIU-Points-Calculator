@@ -53,7 +53,7 @@ MAP = {
     "3": " ",
 }
 
-def cid_to_hebrew(text: str) -> str:
+def convert_cid_to_hebrew(text: str) -> str:
     pattern = r"\(cid:(\d+)\)"  # Match CID tokens in the format '(cid:###)'
 
     def cid_replacer(match):
@@ -63,5 +63,5 @@ def cid_to_hebrew(text: str) -> str:
     return re.sub(pattern, cid_replacer, text)  # Replace all CID tokens in the text
 
 
-def replace_cid_tokens_in_list(row_list):
-    return [cid_to_hebrew(cell) for cell in row_list]  # Process each cell in the list
+def convert_cid_list_to_hebrew(row_list):
+    return [convert_cid_to_hebrew(cell) for cell in row_list]  # Process each cell in the list
