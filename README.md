@@ -45,7 +45,3 @@ biu-points-calculator/
 
 - Flask
 - pdfplumber
-
-```
-
-Feel free to adjust the content as your project evolves.
