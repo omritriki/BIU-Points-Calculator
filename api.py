@@ -1,5 +1,6 @@
 from fastapi import FastAPI, UploadFile, Form
-from calculator import main
+#from calculator import main
+import main
 
 app = FastAPI()
 
