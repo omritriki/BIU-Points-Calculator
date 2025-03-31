@@ -1,8 +1,17 @@
 from fastapi import FastAPI, UploadFile, Form
-#from calculator import main
+from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 import main
 
 app = FastAPI()
+
+# Mount static files (make sure your "static" folder is in the root)
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Homepage route to serve index.html from the root directory
+@app.get("/", response_class=HTMLResponse)
+async def read_root():
+    return FileResponse("index.html")
 
 @app.post("/upload")
 async def upload_file(
