@@ -38,10 +38,7 @@
 
             <!-- Degree Selection -->
             <label for="degree">Choose Degree:</label>
-            <select id="degree" name="degree" onchange="updateStartingYears()" required>
-                {% for degree in degree_options %}
-                    <option value="{{ degree }}">{{ degree }}</option>
-                {% endfor %}
+            <select id="degree" name="degree" required>
             </select>
 
             <!-- Starting Year Selection -->
@@ -64,31 +61,55 @@
 
     <!-- JavaScript Section -->
     <script>
-        // Parse the starting years data passed from the server
-        const startingYears = JSON.parse('{{ starting_years|tojson|safe }}'); 
+        // Fetch degree options and starting years from the backend
+        async function fetchOptions() {
+            try {
+                const response = await fetch('https://biu-points-calculator-new.onrender.com/options');
+                const data = await response.json();
 
-        // Update the starting years dropdown based on the selected degree
-        function updateStartingYears() {
-            const degreeSelect = document.getElementById('degree');
-            const yearSelect = document.getElementById('starting-year');
-            const selectedDegree = degreeSelect.value;
+                if (data.error) {
+                    console.error("Error fetching options:", data.error);
+                    return;
+                }
 
-            // Clear existing options
-            yearSelect.innerHTML = '';
+                const degreeSelect = document.getElementById('degree');
+                const yearSelect = document.getElementById('starting-year');
 
-            // Populate starting years for the selected degree
-            if (startingYears[selectedDegree]) {
-                startingYears[selectedDegree].forEach(year => {
+                // Populate degree options
+                data.degree_options.forEach(degree => {
                     const option = document.createElement('option');
-                    option.value = year;
-                    option.textContent = year;
-                    yearSelect.appendChild(option);
+                    option.value = degree;
+                    option.textContent = degree;
+                    degreeSelect.appendChild(option);
                 });
+
+                // Update starting years when a degree is selected
+                degreeSelect.addEventListener('change', () => {
+                    const selectedDegree = degreeSelect.value;
+
+                    // Clear existing options
+                    yearSelect.innerHTML = '';
+
+                    // Populate starting years for the selected degree
+                    if (data.starting_years[selectedDegree]) {
+                        data.starting_years[selectedDegree].forEach(year => {
+                            const option = document.createElement('option');
+                            option.value = year;
+                            option.textContent = year;
+                            yearSelect.appendChild(option);
+                        });
+                    }
+                });
+
+                // Trigger change event to populate starting years for the default degree
+                degreeSelect.dispatchEvent(new Event('change'));
+            } catch (error) {
+                console.error("Error fetching options:", error);
             }
         }
 
-        // Initialize the starting years dropdown on page load
-        document.addEventListener('DOMContentLoaded', updateStartingYears);
+        // Fetch options on page load
+        document.addEventListener('DOMContentLoaded', fetchOptions);
 
         // Update the form submission handler
         document.getElementById('uploadForm').addEventListener('submit', async function (event) {
