@@ -17,6 +17,10 @@
 # Import necessary modules
 from calculator import read_file, calculate_points, calculate_gpa, points_dict
 
+def get_degree_options_and_years():
+    degree_options = list(points_dict.points.keys())
+    starting_years = {degree: list(points_dict.points[degree].keys()) for degree in degree_options}
+    return degree_options, starting_years
 
 def main(file, degree, year):
     # Process the uploaded file to extract tables
