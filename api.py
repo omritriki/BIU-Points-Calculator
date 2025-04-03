@@ -1,6 +1,6 @@
 from fastapi import FastAPI, UploadFile, Form
 from fastapi.responses import HTMLResponse, FileResponse, JSONResponse
-from fastapi.staticfiles import StaticFiles
+from fastapi.staticfiles import StaticFiles # type: ignore
 import main
 
 app = FastAPI()
@@ -28,8 +28,14 @@ async def upload_file(
     gradesheet: UploadFile, degree: str = Form(...), year: str = Form(...)
 ):
     try:
-        # Call the main function with the uploaded file and form data
-        result = main.main(gradesheet.file, degree, year)
+        # Read the uploaded file
+        file_content = await gradesheet.read()
+
+        # Call the main function with the file content, degree, and year
+        result = main.main(file_content, degree, year)
+
+        # Return the result to the frontend
         return {"success": True, "result": result}
     except Exception as e:
+        # Handle errors and return them to the frontend
         return {"success": False, "error": str(e)}

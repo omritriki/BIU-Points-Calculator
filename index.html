@@ -129,7 +129,10 @@
 
                 if (data.success) {
                     // Display the results on success
-                    resultDiv.innerHTML = `<pre>${data.result}</pre>`;
+                    resultDiv.innerHTML = `
+                        <h3>Calculation Results</h3>
+                        <pre>${JSON.stringify(data.result, null, 2)}</pre>
+                    `;
                     resultDiv.classList.remove('error-message'); // Remove error styling if present
                 } else {
                     // Display an error message on failure

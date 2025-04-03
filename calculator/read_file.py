@@ -28,13 +28,6 @@ def is_gradesheet(pdf):
 
 
 def readFile(pdf_file):
-    """
-    Read and process tables from a PDF file, combining all tables into a single joined table.
-    Args:
-        pdf_file: A werkzeug FileStorage object representing the uploaded PDF.
-    Returns:
-        A single list containing all rows from all tables.
-    """
     joined_table = []  # Initialize a single table to hold all rows
 
     try:
