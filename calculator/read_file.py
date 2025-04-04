@@ -13,6 +13,7 @@
 # ===================================================================================================
 
 import pdfplumber
+import logging
 from calculator import cid_to_hebrew
 
 def is_gradesheet(pdf):
@@ -28,6 +29,7 @@ def is_gradesheet(pdf):
 
 
 def readFile(pdf_file):
+    logging.info("Starting to read the file.")
     joined_table = []  # Initialize a single table to hold all rows
 
     try:
@@ -61,7 +63,8 @@ def readFile(pdf_file):
                         joined_table.append(cleaned_row)  # Add the processed row to the joined table
     except Exception as e:
         # Handle any errors that occur during processing
-        print(f"Error processing PDF file: {str(e)}")
+        logging.error(f"Error processing PDF file: {str(e)}")
         raise
 
+    logging.info("File read successfully.")
     return joined_table
