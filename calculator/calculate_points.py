@@ -20,7 +20,7 @@ def identifyCourses(row):
     if isinstance(row[1], str) and row[1].startswith("83"):
         return 1  # Engineering course
     elif isinstance(row[1], str) and (
-            row[1].startswith("01") or row[1].startswith("02") or row[1].startswith("03") or row[1].startswith("13")):
+            row[1].startswith("01") or row[1].startswith("02") or row[1].startswith("03") or row[1].startswith("04") or row[1].startswith("13")):
         return 2  # Judaism course
     return -1  # Other course
 
