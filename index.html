@@ -34,11 +34,21 @@
 
         <!-- Upload Form -->
         <form id="uploadForm" enctype="multipart/form-data">
+            <!-- Title for file upload -->
+            <label for="gradesheet">Upload Gradesheet (PDF):</label>
             <input type="file" id="gradesheet" name="gradesheet" accept=".pdf" required>
+
+            <!-- Title for degree dropdown -->
+            <label for="degree">Choose Degree:</label>
             <select id="degree" name="degree" required>
             </select>
+
+            <!-- Title for starting year dropdown -->
+            <label for="starting-year">Choose Starting Year:</label>
             <select id="starting-year" name="starting-year" required>
             </select>
+
+            <!-- Submit button -->
             <button type="submit">Calculate</button>
         </form>
 
