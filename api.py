@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://127.0.0.1:8000/"],  # Replace "*" with your frontend's URL for better security
+    allow_origins=["https://biu-points-calculator.onrender.com/"],  # Replace "*" with your frontend's URL for better security
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
