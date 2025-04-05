@@ -64,7 +64,7 @@ async def upload_file(
             return {"success": True, "result": result}
         except Exception as calc_error:
             logging.error(f"Calculation error: {str(calc_error)}")
-            return {"success": False, "error": f"Error calculating points: {str(calc_error)}"}
+            return {"success": False, "error": f"{str(calc_error)}"}
             
     except Exception as e:
         logging.error(f"Error processing file: {str(e)}")
