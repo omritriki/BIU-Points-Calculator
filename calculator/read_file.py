@@ -17,6 +17,8 @@ import pdfplumber
 import logging
 from calculator import cid_to_hebrew
 
+logging.getLogger("pdfplumber").setLevel(logging.ERROR)
+
 def is_gradesheet(pdf):
     expected_header = ['ןויצ', 'ז״נ', 'ש״ש', 'דוק', 'סרוק אשונה םש']
     for page in pdf.pages:
@@ -30,7 +32,6 @@ def is_gradesheet(pdf):
 
 
 def readFile(file_content):
-    logging.info("Starting to read the file.")
     joined_table = []  # Initialize a single table to hold all rows
 
     try:
@@ -70,5 +71,4 @@ def readFile(file_content):
         logging.error(f"Error processing PDF file: {str(e)}")
         raise
 
-    logging.info("File read successfully.")
     return joined_table

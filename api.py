@@ -1,3 +1,16 @@
+# ===================================================================================================
+#                                       BIU N.K.Z Calculator
+#                                            Omri Triki
+#                                       Bar Ilan University
+#                                               2025
+# ===================================================================================================
+# Description:
+#   This script defines the FastAPI backend for the BIU Points Calculator. It includes endpoints for:
+#   - Serving the homepage and static files.
+#   - Fetching degree options and starting years.
+#   - Uploading and processing a gradesheet PDF to calculate points and GPA.
+# ===================================================================================================
+
 from fastapi import FastAPI, UploadFile, Form 
 from fastapi.responses import HTMLResponse, FileResponse, JSONResponse 
 from fastapi.staticfiles import StaticFiles 
@@ -11,7 +24,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://biu-points-calculator.onrender.com/"],  # Replace "*" with your frontend's URL for better security
+    allow_origins=["https://biu-points-calculator.onrender.com/"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -29,7 +42,6 @@ async def read_root():
 @app.get("/options", response_class=JSONResponse)
 async def get_options():
     try:
-        # logging.info("Fetching degree options and starting years.")
         # Fetch degree options and starting years from main.py
         degree_options, starting_years = main.get_degree_options_and_years()
         return {"degree_options": degree_options, "starting_years": starting_years}
@@ -50,7 +62,6 @@ async def upload_file(
         try:
             # Pass the file content to main
             result = main.main(file_content, degree, year)
-            # logging.info("File processed successfully")
             return {"success": True, "result": result}
         except Exception as calc_error:
             logging.error(f"Calculation error: {str(calc_error)}")

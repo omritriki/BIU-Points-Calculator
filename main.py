@@ -14,29 +14,26 @@
 #   - A formatted string summarizing the calculated points and GPA.
 # ===================================================================================================
 
-# Import necessary modules
 import logging
 from calculator import read_file, calculate_points, calculate_gpa, points_dict
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
+
 def get_degree_options_and_years():
-    # logging.info("Fetching degree options and starting years.")
     degree_options = list(points_dict.points.keys())
     starting_years = {degree: list(points_dict.points[degree].keys()) for degree in degree_options}
     return degree_options, starting_years
 
-def main(file_content, degree, year):
-    # logging.info(f"Processing file for degree: {degree}, year: {year}")
-    try:
 
+def main(file_content, degree, year):
+    try:
         table = read_file.readFile(file_content)
                 
         # Calculate engineering and Judaism points
         try:
             engPoints, judPoints = calculate_points.countPoints(table)
-            # logging.info(f"Points calculated - Engineering: {engPoints}, Judaism: {judPoints}")
         except Exception as calc_error:
             logging.error(f"Error in points calculation: {str(calc_error)}")
             logging.error(f"Text sample at error: {table[max(0, calc_error.__traceback__.tb_lineno-20):calc_error.__traceback__.tb_lineno+20]}")

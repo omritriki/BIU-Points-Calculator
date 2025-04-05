@@ -43,7 +43,7 @@ header h1 {
 
 /* Main Content Styles */
 main {
-    margin-top: 65px; /* Space below the header */
+    margin-top: 65px; 
     padding: 20px;
 }
 
@@ -86,8 +86,8 @@ select, input[type="file"], button {
 
 /* File Input Styles */
 input[type="file"] {
-    font-size: 0.9em; /* Slightly smaller text */
-    color: #6e6e73; /* Subtle text color */
+    font-size: 0.9em; 
+    color: #6e6e73; 
 }
 
 /* Focus Styles */
@@ -113,8 +113,8 @@ button:hover {
 #result {
     margin-top: 20px;
     margin-bottom: 10px;
-    font-size: 1.1em; /* Match the font size of <p> */
-    color: #6e6e73; /* Match the color of <p> */
+    font-size: 1.1em; 
+    color: #6e6e73; 
     text-align: left;
     max-width: 420px;
     margin: 10px auto;
@@ -122,31 +122,31 @@ button:hover {
     border-radius: 8px;
     padding: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    font-family: inherit; /* Use the same font as the body */
-    border: 1px solid #d2d2d7; /* Add a subtle border */
-    line-height: 1.4; /* Increase line spacing */
+    font-family: inherit; 
+    border: 1px solid #d2d2d7; 
+    line-height: 1.4; 
 }
 
 /* Update this selector to specifically target the h3 element */
 #result h3.results-header {
-    color: #007aff !important; /* Match the button color */
+    color: #007aff !important; 
     margin-bottom: 1rem;
-    font-weight: 600; /* Match button font weight */
-    text-align: center; /* Center align the header */
+    font-weight: 600; 
+    text-align: center; 
 }
 
 .results-header {
-    color: #007aff !important;  /* Match the button color */
+    color: #007aff !important; 
     margin-bottom: 1rem;
-    font-weight: 600; /* Match button font weight */
-    text-align: center; /* Center align the header */
+    font-weight: 600; 
+    text-align: center; 
 }
 
 /* Error Message Styles */
 .error-message {
-    background-color: #ffe6e6; /* Light red background */
-    color: #d9534f; /* Red text color */
-    border: 1px solid #d9534f; /* Red border */
+    background-color: #ffe6e6; 
+    color: #d9534f; 
+    border: 1px solid #d9534f; 
     border-radius: 8px;
     padding: 10px;
     text-align: left;
@@ -169,11 +169,11 @@ button:hover {
 footer {
     position: fixed;
     padding: 10px 0;
-    bottom: 0; /* Align it to the bottom */
+    bottom: 0; 
     width: 100%;
     margin-top: 10px; 
     margin-bottom: 10px;
-    text-align: center; /* Center the text */
+    text-align: center; 
     font-size: 0.9em;
     color: #6e6e73;
 }
@@ -187,6 +187,6 @@ footer {
 
 /* Small Text Styles */
 .small-text {
-    font-size: 0.8em; /* Slightly smaller text */
-    color: #6e6e73; /* Subtle text color */
+    font-size: 0.8em; 
+    color: #6e6e73; 
 }

@@ -22,7 +22,7 @@ def calculateGPA(table):
             grade = table[i][4]
             curr_points = table[i][3]
 
-            # Handle duplicate course rows (e.g., retakes or partial grades)
+            # Handle duplicate course rows (partial grades)
             if i != len(table) - 1 and table[i + 1][0] == table[i][0]:
                 curr_points += table[i + 1][3]
             if i != 0 and table[i - 1][0] == table[i][0]:
@@ -31,4 +31,4 @@ def calculateGPA(table):
             # Accumulate weighted grades and credit points
             sum += (grade * curr_points)
             points += curr_points
-    return sum / points  # Return the calculated GPA
+    return sum / points  

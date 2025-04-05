@@ -29,8 +29,6 @@ def countPoints(table):
     try:
         engPoints = 0.0  
         judPoints = 0.0  
-        
-        # logging.info(f"Processing table: {table[0]}")
 
         for row in table:
             switch = identifyCourses(row)  # Identify the course type
@@ -40,18 +38,16 @@ def countPoints(table):
                 try:    
                     engPoints += row[3]
                 except (TypeError, ValueError):
-                    pass  # Ignore invalid data
+                    pass  
             if switch == 2:  # Judaism course
                 try:
                     judPoints += row[3]
                 except (TypeError, ValueError):
-                    pass  # Ignore invalid data
+                    pass  
         
-        # logging.info(f"Calculated points - Engineering: {engPoints}, Judaism: {judPoints}")
         return engPoints, judPoints
         
     except Exception as e:
         logging.error(f"Error in countPoints: {str(e)}")
-        # logging.error(f"Error occurred at position: {e.__traceback__.tb_lineno}")
         raise
 
