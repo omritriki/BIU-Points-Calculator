@@ -10,10 +10,10 @@ You can access the application here:
 
 ## Features
 
-- Upload your PDF gradesheet.
-- Select your degree and starting year.
-- Calculate total credit points and GPA dynamically.
-- Accessible online from any device.
+- Upload your PDF gradesheet
+- Select your degree and starting year
+- Calculate total credit points and GPA
+- Accessible online from any device
 
 ## Directory Structure
 
