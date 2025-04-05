@@ -19,7 +19,6 @@ import logging
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 app.add_middleware(
