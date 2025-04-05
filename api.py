@@ -29,7 +29,7 @@ async def read_root():
 @app.get("/options", response_class=JSONResponse)
 async def get_options():
     try:
-        logging.info("Fetching degree options and starting years.")
+        # logging.info("Fetching degree options and starting years.")
         # Fetch degree options and starting years from main.py
         degree_options, starting_years = main.get_degree_options_and_years()
         return {"degree_options": degree_options, "starting_years": starting_years}
@@ -39,24 +39,23 @@ async def get_options():
 
 @app.post("/upload")
 async def upload_file(
-    gradesheet: UploadFile = Form(...),  # File input
-    degree: str = Form(...),            # Degree selection
-    year: str = Form(...)               # Starting year selection
+    gradesheet: UploadFile = Form(...),
+    degree: str = Form(...),
+    year: str = Form(...)
 ):
     try:
-        logging.info(f"Received request to /upload")
-        logging.info(f"Received file: {gradesheet.filename}")
-        logging.info(f"Degree: {degree}")
-        logging.info(f"Year: {year}")
-
-        # Read the uploaded file
+        # Read the file content
         file_content = await gradesheet.read()
-        logging.info(f"File content size: {len(file_content)} bytes")
 
-        # Pass the file content, degree, and year to the main function
-        result = main.main(file_content, degree, year)
-        logging.info("File processed successfully.")
-        return {"success": True, "result": result}
+        try:
+            # Pass the file content to main
+            result = main.main(file_content, degree, year)
+            # logging.info("File processed successfully")
+            return {"success": True, "result": result}
+        except Exception as calc_error:
+            logging.error(f"Calculation error: {str(calc_error)}")
+            return {"success": False, "error": f"Error calculating points: {str(calc_error)}"}
+            
     except Exception as e:
         logging.error(f"Error processing file: {str(e)}")
         return {"success": False, "error": str(e)}

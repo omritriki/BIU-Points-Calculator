@@ -12,6 +12,7 @@
 #   - A list of all extracted and processed tables.
 # ===================================================================================================
 
+import io
 import pdfplumber
 import logging
 from calculator import cid_to_hebrew
@@ -28,13 +29,16 @@ def is_gradesheet(pdf):
     return False
 
 
-def readFile(pdf_file):
+def readFile(file_content):
     logging.info("Starting to read the file.")
     joined_table = []  # Initialize a single table to hold all rows
 
     try:
+        # Convert bytes to file-like object
+        pdf_file = io.BytesIO(file_content)
+        
         # Open the PDF file using pdfplumber
-        with pdfplumber.open(pdf_file.stream) as pdf:
+        with pdfplumber.open(pdf_file) as pdf:
             # Verify if the file is a gradesheet
             if not is_gradesheet(pdf):
                 raise ValueError("The uploaded file is not a valid gradesheet")

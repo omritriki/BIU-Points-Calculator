@@ -13,6 +13,8 @@
 #   - judPoints: Total Judaism points as a float.
 # ===================================================================================================
 
+import logging
+
 def identifyCourses(row):
     # Check if the course ID starts with specific prefixes
     if isinstance(row[1], str) and row[1].startswith("83"):
@@ -24,22 +26,32 @@ def identifyCourses(row):
 
 
 def countPoints(table):
-    engPoints = 0.0  
-    judPoints = 0.0  
+    try:
+        engPoints = 0.0  
+        judPoints = 0.0  
+        
+        # logging.info(f"Processing table: {table[0]}")
 
-    for row in table:
-        switch = identifyCourses(row)  # Identify the course type
-        if switch == -1:
-            continue  # Skip rows that are not relevant
-        if switch == 1:  # Engineering course
-            try:    
-                engPoints += row[3]
-            except (TypeError, ValueError):
-                pass  # Ignore invalid data
-        if switch == 2:  # Judaism course
-            try:
-                judPoints += row[3]
-            except (TypeError, ValueError):
-                pass  # Ignore invalid data
-    return engPoints, judPoints  # Return the calculated points
+        for row in table:
+            switch = identifyCourses(row)  # Identify the course type
+            if switch == -1:
+                continue  # Skip rows that are not relevant
+            if switch == 1:  # Engineering course
+                try:    
+                    engPoints += row[3]
+                except (TypeError, ValueError):
+                    pass  # Ignore invalid data
+            if switch == 2:  # Judaism course
+                try:
+                    judPoints += row[3]
+                except (TypeError, ValueError):
+                    pass  # Ignore invalid data
+        
+        # logging.info(f"Calculated points - Engineering: {engPoints}, Judaism: {judPoints}")
+        return engPoints, judPoints
+        
+    except Exception as e:
+        logging.error(f"Error in countPoints: {str(e)}")
+        # logging.error(f"Error occurred at position: {e.__traceback__.tb_lineno}")
+        raise
 

@@ -22,42 +22,42 @@ from calculator import read_file, calculate_points, calculate_gpa, points_dict
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 def get_degree_options_and_years():
-    logging.info("Fetching degree options and starting years.")
+    # logging.info("Fetching degree options and starting years.")
     degree_options = list(points_dict.points.keys())
     starting_years = {degree: list(points_dict.points[degree].keys()) for degree in degree_options}
     return degree_options, starting_years
 
-def main(file, degree, year):
-    logging.info(f"Processing file for degree: {degree}, year: {year}")
+def main(file_content, degree, year):
+    # logging.info(f"Processing file for degree: {degree}, year: {year}")
     try:
-        # Process the uploaded file to extract tables
-        logging.info("Reading file content.")
-        table = read_file.readFile(file)  # Extract data from the PDF
-        logging.info(f"Extracted table: {table}")
 
+        table = read_file.readFile(file_content)
+                
         # Calculate engineering and Judaism points
-        logging.info("Calculating points.")
-        engPoints, judPoints = calculate_points.countPoints(table)
-        logging.info(f"Engineering points: {engPoints}, Judaism points: {judPoints}")
+        try:
+            engPoints, judPoints = calculate_points.countPoints(table)
+            # logging.info(f"Points calculated - Engineering: {engPoints}, Judaism: {judPoints}")
+        except Exception as calc_error:
+            logging.error(f"Error in points calculation: {str(calc_error)}")
+            logging.error(f"Text sample at error: {table[max(0, calc_error.__traceback__.tb_lineno-20):calc_error.__traceback__.tb_lineno+20]}")
+            raise
 
         # Calculate total points and GPA
-        logging.info("Calculating GPA and total points.")
         total_points = points_dict.points[degree][year] * 2
         max_binary_points = points_dict.points[degree][year] * 0.2
         average = calculate_gpa.calculateGPA(table)
-        logging.info(f"Total points: {total_points}, Max binary points: {max_binary_points}, Average: {average}")
 
-        # Prepare the result summary
         result = (
             f"Engineering points: {engPoints:.2f}<span class='small-text'> (out of {total_points:.2f} points)</span><br>"
             f"Maximum binary points: {max_binary_points:.2f}<br>"
             f"Judaism points: {judPoints}<span class='small-text'> (out of 20 points)</span><br>"
             f"Average: {average:.2f}"
         )
-        logging.info("Result prepared successfully.")
+        
         return result
+
     except Exception as e:
-        logging.error(f"Error in main function: {str(e)}")
+        logging.error(f"Error processing PDF file: {str(e)}")
         raise
 
 
