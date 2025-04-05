@@ -32,6 +32,7 @@ biu-points-calculator/
 │   └── styles.css
 ├── templates/             # HTML templates
 │   └── index.html
+├── example_gradesheet.pdf # Example gradesheet for testing
 └── requirements.txt       # Python dependencies
 ```
 
@@ -77,6 +78,20 @@ If you want to run the application locally, follow these steps:
    ```
    http://127.0.0.1:8000
    ```
+
+## Example Gradesheet
+
+An example gradesheet is included in the repository to help you test the application. You can find it at:
+
+```
+example_gradesheet.pdf
+```
+
+To use the example:
+1. Open the application (either locally or on the live website).
+2. Upload the `example_gradesheet.pdf` file.
+3. Select a degree and starting year.
+4. Click "Calculate" to see the results.
 
 ## Dependencies
 
