@@ -87,8 +87,6 @@ If you want to run the application locally, follow these steps:
 
 ## Contributing
 
-Contributions are welcome! Feel free to open an issue or submit a pull request.
+Contributions are welcome! Feel free to suggest new features, and inform me on bugs you found.
 
-## License
 
-This project is licensed under the MIT License.
