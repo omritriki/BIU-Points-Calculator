@@ -124,6 +124,22 @@ button:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     font-family: inherit; /* Use the same font as the body */
     border: 1px solid #d2d2d7; /* Add a subtle border */
+    line-height: 1.4; /* Increase line spacing */
+}
+
+/* Update this selector to specifically target the h3 element */
+#result h3.results-header {
+    color: #007aff !important; /* Match the button color */
+    margin-bottom: 1rem;
+    font-weight: 600; /* Match button font weight */
+    text-align: center; /* Center align the header */
+}
+
+.results-header {
+    color: #007aff !important;  /* Match the button color */
+    margin-bottom: 1rem;
+    font-weight: 600; /* Match button font weight */
+    text-align: center; /* Center align the header */
 }
 
 /* Error Message Styles */
