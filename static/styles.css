@@ -168,6 +168,7 @@ button:hover {
 /* Footer Styles */
 footer {
     /*padding: 5px;*/
+    position: relative;
     bottom: 0; 
     width: 100%;
     margin-top: 5px; 
