@@ -50,7 +50,6 @@ main {
 p {
     font-size: 1em;
     color: #6e6e73;
-    padding: 10px;
     margin-bottom: 20px;
 }
 
@@ -168,7 +167,7 @@ button:hover {
 
 /* Footer Styles */
 footer {
-    position: fixed;
+    /*position: fixed;*/
     padding: 10px;
     bottom: 0; 
     width: 100%;
