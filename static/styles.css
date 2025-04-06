@@ -50,6 +50,7 @@ main {
 p {
     font-size: 1em;
     color: #6e6e73;
+    padding: 10px;
     margin-bottom: 20px;
 }
 
