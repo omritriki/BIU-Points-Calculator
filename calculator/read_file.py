@@ -26,6 +26,7 @@ def is_gradesheet(pdf):
         if tables:
             # Assume the header is in the first row of the first table
             header_text = cid_to_hebrew.convert_cid_list_to_hebrew(tables[0][0])
+            logging.debug(f"Extracted header: {header_text}")
             if expected_header == header_text:
                 return True
     return False
