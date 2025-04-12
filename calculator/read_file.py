@@ -20,16 +20,24 @@ from calculator import cid_to_hebrew
 logging.getLogger("pdfplumber").setLevel(logging.ERROR)
 
 def is_gradesheet(pdf):
-    expected_header = ['ןויצ', 'ז״נ', 'ש״ש', 'דוק', 'סרוק אשונה םש']
+    # Define both possible headers (with different quotation marks)
+    expected_headers = [
+        ['ןויצ', 'ז״נ', 'ש״ש', 'דוק', 'סרוק אשונה םש'],  # Using Hebrew Punctuation Gershayim (U+05F4)
+        ['ןויצ', 'ז"נ', 'ש"ש', 'דוק', 'סרוק אשונה םש']   # Using Regular Quotation Mark (U+0022)
+    ]
+    
     for page in pdf.pages:
         tables = page.extract_tables()
         if tables:
             # Assume the header is in the first row of the first table
             header_text = cid_to_hebrew.convert_cid_list_to_hebrew(tables[0][0])
             logging.debug(f"Extracted header: {header_text}")
-            if expected_header == header_text:
+            
+            # Check if the header matches any of the expected formats
+            if header_text in expected_headers:
                 return True
-    return False
+                
+    raise ValueError(f"Unexpected header: {header_text}, expected one of: {expected_headers}")
 
 
 def readFile(file_content):

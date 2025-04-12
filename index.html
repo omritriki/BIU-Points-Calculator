@@ -63,10 +63,15 @@
 
     <!-- JavaScript Section -->
     <script>
+        // Set the base URL depending on the environment
+        const BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://127.0.0.1:8000'
+            : 'https://biu-points-calculator.onrender.com';
+
         // Fetch degree options and starting years from the backend
         async function fetchOptions() {
             try {
-                const response = await fetch('https://biu-points-calculator.onrender.com/options');
+                const response = await fetch(`${BASE_URL}/options`);
                 const data = await response.json();
 
                 if (data.error) {
@@ -140,7 +145,7 @@
             }
 
             try {
-                const response = await fetch('https://biu-points-calculator.onrender.com/upload', {
+                const response = await fetch(`${BASE_URL}/upload`, {
                     method: 'POST',
                     body: formData,
                 });
