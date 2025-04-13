@@ -190,3 +190,130 @@ footer {
     font-size: 0.8em; 
     color: #6e6e73; 
 }
+
+/* Exemptions Button Styles */
+.exemptions-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f5f5f7;
+    border: 1px solid #d2d2d7;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin: 15px 0;
+}
+
+.exemptions-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #f5f5f7;
+    border: 1px solid #d2d2d7;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.exemptions-btn:hover {
+    background-color: #e8e8ed;
+}
+
+.btn-text {
+    font-size: 1em;
+    color: #1d1d1f;
+}
+
+.counter {
+    background-color: #ffffff;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.9em;
+    color: #6e6e73;
+    border: 1px solid #d2d2d7;
+}
+
+/* Exemptions Counter Styles */
+.counter-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f5f5f7;
+    border: 1px solid #d2d2d7;
+    border-radius: 8px;
+    padding: 10px 15px;
+}
+
+/* Label Text for Exemptions */
+.label-text {
+    font-size: 1em; /* Match the font size of labels */
+    font-weight: 500; /* Match the font weight of labels */
+    color: #1d1d1f; /* Match the color of labels */
+    margin-right: 10px;
+    text-align: left; /* Align text to the left */
+}
+
+/* Counter Buttons Container */
+.counter-buttons {
+    display: flex;
+    align-items: center;
+    border: 1px solid #d2d2d7;
+    border-radius: 8px;         /* Updated to match dropdown boxes */
+    overflow: hidden;
+    background-color: #ffffff;  /* Use a similar background as other inputs */
+    padding: 2px;              /* Slight padding for a compact look */
+}
+
+/* Counter Button Styles */
+.counter-btn {
+    width: 30px; 
+    height: 30px; 
+    border: none;
+    background-color: transparent;
+    color: #1d1d1f;
+    font-size: 1em;
+    font-weight: 500;
+    line-height: 30px; /* ensure same height as container */
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.counter-btn:hover {
+    background-color: #e8e8ed;
+}
+
+/* Fine-tune the horizontal spacing to pull buttons slightly closer to the number */
+.counter-btn.minus {
+    margin-right: -2px;
+}
+
+.counter-btn.plus {
+    margin-left: -2px;
+}
+
+/* Counter Number Styles */
+.counter {
+    width: 30px;
+    text-align: center;
+    font-size: 1em;
+    color: #1d1d1f;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+}
+
+/* Small Message Styles for Exemptions */
+.small-message {
+    font-size: 0.8em;
+    color: #6e6e73;
+    margin-left: 90px;
+}

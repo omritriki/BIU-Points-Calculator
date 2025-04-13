@@ -48,6 +48,19 @@
             <select id="starting-year" name="starting-year" required>
             </select>
 
+            <!-- Exemptions Controls -->
+            <div class="exemptions-container">
+                <div class="exemptions-label">
+                    <span class="label-text">Add Ptorim:</span>
+                    <span class="small-message">Up to 10</span>
+                </div>
+                <div class="counter-buttons">
+                    <button type="button" class="counter-btn minus">-</button>
+                    <span class="counter">0</span>
+                    <button type="button" class="counter-btn plus">+</button>
+                </div>
+            </div>
+
             <!-- Submit button -->
             <button type="submit">Calculate</button>
         </form>
@@ -120,6 +133,28 @@
         // Fetch options on page load
         document.addEventListener('DOMContentLoaded', fetchOptions);
 
+        // Exemption Counter Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const counterDisplay = document.querySelector('.counter');
+            const plusBtn = document.querySelector('.counter-btn.plus');
+            const minusBtn = document.querySelector('.counter-btn.minus');
+            let count = parseInt(counterDisplay.textContent, 10) || 0;
+
+            plusBtn.addEventListener('click', () => {
+                if (count < 10) {
+                    count++;
+                    counterDisplay.textContent = count;
+                }
+            });
+
+            minusBtn.addEventListener('click', () => {
+                if (count > 0) {
+                    count--;
+                    counterDisplay.textContent = count;
+                }
+            });
+        });
+
         // Update the form submission handler
         document.getElementById('uploadForm').addEventListener('submit', async function (event) {
             event.preventDefault();
@@ -127,6 +162,7 @@
             const fileInput = document.getElementById('gradesheet');
             const degreeSelect = document.getElementById('degree');
             const yearSelect = document.getElementById('starting-year');
+            const exemptions = document.querySelector('.counter').textContent;
 
             // Validate inputs
             if (!fileInput.files.length || !degreeSelect.value || !yearSelect.value) {
@@ -138,6 +174,8 @@
             formData.append('gradesheet', fileInput.files[0]);
             formData.append('degree', degreeSelect.value);
             formData.append('year', yearSelect.value);
+            // send the exemptions value as well
+            formData.append('exemptions', exemptions);
 
             // Log form data for debugging
             for (const [key, value] of formData.entries()) {
