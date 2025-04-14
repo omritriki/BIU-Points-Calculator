@@ -27,7 +27,7 @@ def get_degree_options_and_years():
     return degree_options, starting_years
 
 
-def main(file_content, degree, year):
+def main(file_content, degree, year, exemptions):
     try:
         table = read_file.readFile(file_content)
                 
@@ -43,11 +43,19 @@ def main(file_content, degree, year):
         total_points = points_dict.points[degree][year] * 2
         max_binary_points = points_dict.points[degree][year] * 0.2
         average = calculate_gpa.calculateGPA(table)
+        exemptions += exemptions
+
+        while judPoints < 20 and exemptions > 0:
+            judPoints += 1
+            exemptions -= 1
+
+        if exemptions > 0:
+            engPoints += exemptions
 
         result = (
-            f"Engineering points: {engPoints:.2f}<span class='small-text'> (out of {total_points:.2f} points)</span><br>"
+            f"Engineering points: {engPoints:.2f}<span class='small-text'> (out of {total_points:.2f})</span><br>"
             f"Maximum binary points: {max_binary_points:.2f}<br>"
-            f"Judaism points: {judPoints}<span class='small-text'> (out of 20 points)</span><br>"
+            f"Judaism points: {judPoints}<span class='small-text'> (out of 20)</span><br>"
             f"Average: {average:.2f}"
         )
         

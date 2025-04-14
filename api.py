@@ -52,15 +52,17 @@ async def get_options():
 async def upload_file(
     gradesheet: UploadFile = Form(...),
     degree: str = Form(...),
-    year: str = Form(...)
+    year: str = Form(...),
+    exemptions: int = Form(...)  
 ):
+
     try:
         # Read the file content
         file_content = await gradesheet.read()
 
         try:
             # Pass the file content to main
-            result = main.main(file_content, degree, year)
+            result = main.main(file_content, degree, year, exemptions)
             return {"success": True, "result": result}
         except Exception as calc_error:
             logging.error(f"Calculation error: {str(calc_error)}")

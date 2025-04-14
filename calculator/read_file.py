@@ -75,9 +75,30 @@ def readFile(file_content):
                             # Reverse the text in the cell
                             cleaned_row[i] = cell[::-1]
                         joined_table.append(cleaned_row)  # Add the processed row to the joined table
+
+        # Filter duplicate course attempts
+        # We assume the course ID is in column index 1
+        course_groups = {}
+        for row in joined_table:
+            # Ensure course_id is a single value (e.g., string or number)
+            course_id = str(row[0])  # Convert to string to make it hashable
+            if course_id not in course_groups:
+                course_groups[course_id] = []
+            course_groups[course_id].append(row)
+
+        filtered_table = []
+        for course_id, rows in course_groups.items():
+            # Ensure we only keep the last two rows for each course
+            if len(rows) > 2:
+                # Keep only the last two rows
+                filtered_table.extend(rows[-2:])
+            else:
+                # If the course appears only once, keep it
+                filtered_table.extend(rows)
+
+        return filtered_table
+
     except Exception as e:
         # Handle any errors that occur during processing
         logging.error(f"Error processing PDF file: {str(e)}")
         raise
-
-    return joined_table
